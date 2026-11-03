@@ -6,7 +6,7 @@
   <title>Жаңа жыл құтты болсын! / С Новым годом!</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -15,33 +15,36 @@
     }
     body {
       min-height: 100vh;
+      min-height: 100dvh;
       font-family: 'Montserrat', sans-serif;
       color: #ffffff;
       display: flex;
+      flex-direction: column;
+      justify-content: flex-end; /* Спускаем блок с кнопками вниз, открывая поезд */
       align-items: center;
-      justify-content: center;
       position: relative;
       overflow: hidden;
-      padding: 24px;
+      padding: 24px 20px 36px 20px;
       background-color: #0b1320;
     }
 
-    /* Фоновое фото из репозитория */
-    .bg2-image {
+    /* Фоновое фото: фокус точно на поезде и фонаре */
+    .bg-image {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background-image: 
-        linear-gradient(rgba(10, 25, 47, 0.55), rgba(5, 12, 22, 0.75)),
-        url('bg2.jpg');
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(10, 18, 30, 0.5) 50%, rgba(5, 10, 18, 0.92) 100%),
+        url('bg.jpg');
       background-size: cover;
-      background-position: center;
+      background-position: center 30%; /* Центр кадра на локомотиве */
+      background-repeat: no-repeat;
       z-index: 1;
     }
 
-    /* Анимация снега */
+    /* Анимация падающего снега */
     .snowflake {
       position: fixed;
       top: -20px;
@@ -57,45 +60,35 @@
       100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
     }
 
-    /* Стеклянная карточка */
+    /* Нижняя стеклянная карточка */
     .card {
       position: relative;
       width: 100%;
-      max-width: 440px;
-      background: rgba(15, 23, 42, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      border-radius: 30px;
-      padding: 44px 26px;
+      max-width: 420px;
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 28px 22px 22px 22px;
       text-align: center;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.35);
       z-index: 4;
     }
-    .badge {
-      display: inline-block;
-      font-size: 3.2rem;
-      margin-bottom: 14px;
-      filter: drop-shadow(0 6px 16px rgba(1, 161, 229, 0.35));
-    }
+
     .main-title {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 700;
       line-height: 1.4;
-      margin-bottom: 8px;
+      margin-bottom: 20px;
       letter-spacing: -0.2px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
     }
-    .subtitle {
-      font-size: 0.9rem;
-      color: #cbd5e1;
-      margin-bottom: 30px;
-      font-weight: 400;
-      line-height: 1.4;
-    }
+
     .buttons-wrap {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
     /* Базовый стиль кнопок */
@@ -104,14 +97,14 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-      padding: 17px 20px;
-      font-size: 1.05rem;
+      padding: 16px 18px;
+      font-size: 1.02rem;
       font-weight: 700;
       text-decoration: none;
       color: #ffffff;
-      border-radius: 18px;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      border-radius: 16px;
+      transition: all 0.25s ease;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
       letter-spacing: 0.2px;
     }
 
@@ -122,7 +115,7 @@
     }
     .btn-kz:hover, .btn-kz:active {
       transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(1, 161, 229, 0.55);
+      box-shadow: 0 14px 28px rgba(1, 161, 229, 0.55);
       background: linear-gradient(135deg, #1cb4f8 0%, #01a1e5 100%);
     }
 
@@ -133,19 +126,20 @@
     }
     .btn-ru:hover, .btn-ru:active {
       transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(181, 144, 22, 0.55);
+      box-shadow: 0 14px 28px rgba(181, 144, 22, 0.55);
       background: linear-gradient(135deg, #caa31e 0%, #b59016 100%);
     }
 
     .btn svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       fill: currentColor;
       flex-shrink: 0;
     }
+
     .footer-note {
-      margin-top: 28px;
-      font-size: 0.85rem;
+      margin-top: 18px;
+      font-size: 0.8rem;
       font-weight: 600;
       color: #cbd5e1;
       letter-spacing: 1px;
@@ -166,18 +160,19 @@
   <div class="snowflake" style="left: 88%; animation-duration: 10s; animation-delay: 5s; font-size: 1rem;">❆</div>
   <div class="snowflake" style="left: 95%; animation-duration: 12s; animation-delay: 2.5s; font-size: 1.5rem;">❄</div>
 
+  <!-- Карточка внизу страницы -->
   <div class="card">
-    <div class="badge">🚂</div>
-
     <div class="main-title">Бейнеқұттықтау / Видеопоздравление</div>
-    
+
     <div class="buttons-wrap">
-      <a href="https://youtube.com/shorts/4BTTCMMKcuE?feature=share" target="_blank" rel="noopener noreferrer" class="btn btn-kz">
+      <!-- Қазақша -->
+      <a href="ВСТАВЬТЕ_ССЫЛКУ_КАЗАХША" target="_blank" rel="noopener noreferrer" class="btn btn-kz">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         Жаңа жыл құтты болсын!
       </a>
 
-      <a href="https://youtube.com/shorts/zNhcPhazkL8" target="_blank" rel="noopener noreferrer" class="btn btn-ru">
+      <!-- Русский -->
+      <a href="ВСТАВЬТЕ_ССЫЛКУ_РУССКИЙ" target="_blank" rel="noopener noreferrer" class="btn btn-ru">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         С Новым годом!
       </a>
